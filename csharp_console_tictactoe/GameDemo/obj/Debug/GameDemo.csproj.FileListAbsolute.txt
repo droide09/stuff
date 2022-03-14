@@ -1,0 +1,6 @@
+C:\Users\droid\source\repos\GameDemo\bin\Debug\GameDemo.exe.config
+C:\Users\droid\source\repos\GameDemo\bin\Debug\GameDemo.exe
+C:\Users\droid\source\repos\GameDemo\bin\Debug\GameDemo.pdb
+C:\Users\droid\source\repos\GameDemo\obj\Debug\GameDemo.csproj.CoreCompileInputs.cache
+C:\Users\droid\source\repos\GameDemo\obj\Debug\GameDemo.exe
+C:\Users\droid\source\repos\GameDemo\obj\Debug\GameDemo.pdb

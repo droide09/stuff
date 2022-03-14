@@ -1,0 +1,71 @@
+﻿@model FoodOrdering.Models.Order
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .formrow {
+        padding:5px;
+    }
+
+    .formcontainer {
+        padding:10px;
+        background-color:yellow;
+        border:1px solid #ddd;
+    }
+</style>
+
+<h2>Order your food!</h2>
+
+@using (Html.BeginForm("MakeOrder", "Ordering", FormMethod.Post))
+{
+    <div class="formcontainer">
+        <div class="formrow">
+            <b>Your Name:</b>
+            @Html.TextBoxFor(a => a.EmployeeName, new { @class = "form-control" })
+        </div>
+        <div class="formrow">
+            <b>Food provider:</b>
+            @Html.DropDownListFor(a => a.FoodProvider, new List<SelectListItem>
+                           {
+                             new SelectListItem{Text="Pizza Hut", Value="PizzaHut"},
+                             new SelectListItem{Text="McDonalds", Value="McDonalds"},
+                             new SelectListItem{Text="BurgerKing", Value="BurgerKing"},
+                             new SelectListItem{Text="KFC", Value="KFC"}
+                           }, "Please select", new { @id = "FoodProvider", @onchange = "SelectProvider()" })
+        </div>
+
+        <div class="formrow">
+            <b>Select your food! :</b>
+            @Html.DropDownListFor(a => a.FoodType,
+                   new SelectList(Enumerable.Empty<SelectListItem>(), "FoodType", "FoodType"),
+                          "Select food",
+                          new { @class = "form-control" })
+
+        </div>
+        <div class="formrow">
+            <input id="Submit" type="submit" value="Submit" class="btn" />
+        </div>
+    </div>
+}
+
+<script>
+    function SelectProvider() {
+        var foodProvider = $('#FoodProvider').val();
+        $.ajax({
+            url: '/Ordering/GetFoodList',
+            type: "GET",
+            dataType: "JSON",
+            data: { Provider: foodProvider },
+            success: function (foodlist) {
+                $("#FoodType").html(""); // clear before appending new list
+                for (var i = 0; i < foodlist.length; i++)
+                {
+                    $("#FoodType").append(
+                        $('<option name="' + foodlist[i].Item2 +'">'+foodlist[i].Item2.replace(':',' - price: $')+'</option>'));
+                }
+            }
+        });
+    }
+</script>
+
+

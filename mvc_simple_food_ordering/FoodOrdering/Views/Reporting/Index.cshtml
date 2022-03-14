@@ -1,0 +1,37 @@
+﻿@using FoodOrdering.DBHelper;
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    th {
+        font-weight:bold;
+    }
+    thead {
+        border-bottom:1px solid #ccc;
+    }
+</style>
+
+<h2>Orders List</h2>
+
+<table>
+    <thead>
+        <th style="width:200px">Employee Name</th>
+        <th style="width:200px">Food Provider</th>
+        <th style="width:200px">Food Type</th>
+        <th style="width:200px">Price</th>
+    </thead>
+    <tbody>   
+        @foreach (var item in DB.GetInstance.GetOrderList())
+        {
+            <tr>
+                <td>@item.EmployeeName</td>
+                <td>@item.FoodProvider</td>
+                <td>@item.FoodType</td>
+                <td>@item.Price</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
